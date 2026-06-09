@@ -1,6 +1,6 @@
-# Simple Attention for Simple MCUs
+# SimA-MCU: Softmax-Free Attention on Microcontrollers for Real-Time EEG Decoding
 
-This repository provides the open-source implementation for the paper **"Simple Attention for Simple MCUs"**, demonstrating the efficiency of replacing the standard Multi-Head Self-Attention (MHSA) softmax operation with an $L_1$ normalization (Simple Attention) to enable high-performance, low-latency inference on microcontrollers.
+This repository provides the open-source implementation for the paper **"SimA-MCU: Softmax-Free Attention on Microcontrollers for Real-Time EEG Decoding"**, demonstrating the efficiency of replacing the standard Multi-Head Self-Attention (MHSA) softmax operation with an $L_1$ normalization (Simple Attention) to enable high-performance, low-latency inference on microcontrollers.
 
 ## Repository Structure
 
@@ -40,4 +40,4 @@ The code in `stm32_mcu_c_code/` can be easily integrated into any STM32CubeIDE p
 3. Call `SimMHAttention` from `Operations.h` to execute the optimized Simple Attention layer.
 
 ## License
-[Specify License Here]
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
