@@ -11,11 +11,13 @@
 # Get the directory where this script is located
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-export HOME="/Brain/private/${USER}"
-export XDG_CACHE_HOME="$HOME/.cache"
-export HF_HOME="$HOME/.cache/huggingface"
-export TRANSFORMERS_CACHE="$HOME/.cache/huggingface"
-export TORCH_HOME="$HOME/.cache/torch"
+if [ -d "/Brain/private" ]; then
+    export HOME="/Brain/private/${USER}"
+    export XDG_CACHE_HOME="$HOME/.cache"
+    export HF_HOME="$HOME/.cache/huggingface"
+    export TRANSFORMERS_CACHE="$HOME/.cache/huggingface"
+    export TORCH_HOME="$HOME/.cache/torch"
+fi
 
 echo "starting job on $(hostname) at $(date)"
 

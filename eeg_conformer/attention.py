@@ -93,6 +93,11 @@ class SimpleAttention(nn.Module):
         self.att_drop = nn.Dropout(dropout)
         self.projection = nn.Linear(emb_size, emb_size)
 
+        # Learnable per-head temperature to rescale SimA output.
+        # L1 normalization compresses the dynamic range of the attention;
+        # this parameter lets the network recover appropriate magnitudes.
+        self.temperature = nn.Parameter(torch.ones(num_heads, 1, 1))
+
         self.rearrange_stack = Rearrange("b n (h d) -> b h n d", h=num_heads)
         self.rearrange_unstack = Rearrange("b h n d -> b n (h d)")
 
@@ -115,6 +120,9 @@ class SimpleAttention(nn.Module):
             out = torch.matmul(torch.matmul(queries, keys.transpose(-2, -1)), values)
         else:
             out = torch.matmul(queries, torch.matmul(keys.transpose(-2, -1), values))
+
+        # Apply learnable temperature scaling per head.
+        out = out * self.temperature
 
         out = self.att_drop(out)
         out = self.rearrange_unstack(out)
